@@ -3,20 +3,8 @@ AddDefaultCharset utf-8
 DefaultLanguage es-ES
     
 #Options 
- +FollowSymLinks
  RewriteEngine on
  RewriteBase /
  Options -MultiViews
 
- ErrorDocument 404 /resources/http_errors/404.html
- ErrorDocument 500 /resources/http_errors/500.html
-
-#Home#
-RewriteRule home$ /php-class/index.php?route=home [L]#
-
-#Register#
- #RewriteRule register$ /php-class/index.php?route=register [L]#
- #RewriteRule comprobar_token$ /php-class/index.php?route=comprobar_token [L]#
-
- #Login#
- #RewriteRule login$ /php-class/index.php?route=login [L]#
+ RewriteRule students$ /php-class/index.php?route=students [L]

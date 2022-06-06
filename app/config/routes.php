@@ -1,9 +1,7 @@
 <?php
 
 return[
-    "home"=>"HomeController",
-    "alumnos"=>"AlummnosController",
+    "students"=>"StudentsController",
     "tutores"=>"TutoresController"
 ]
-
 ?>
