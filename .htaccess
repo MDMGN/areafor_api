@@ -1,10 +1,11 @@
-
 AddDefaultCharset utf-8
 DefaultLanguage es-ES
-    
-#Options 
- RewriteEngine on
- RewriteBase /
- Options -MultiViews
 
- RewriteRule students$ /php-class/index.php?route=students [L]
+#Options 
+RewriteEngine on
+RewriteBase /
+Options -MultiViews
+
+RewriteRule home$ /areafor-api/index.php?route=home [L]
+
+RewriteRule students$ /areafor-api/index.php?route=students [L]
