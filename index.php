@@ -7,7 +7,6 @@
         if(!$errorDb){
             Router::get($_GET['route']);
         }
-        header("Content-type:application/json");
     ?>
 
 <?php 

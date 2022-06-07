@@ -6,6 +6,8 @@ RewriteEngine on
 RewriteBase /
 Options -MultiViews
 
+DirectoryIndex /areafor-api/index.php?route=home [L]
 RewriteRule home$ /areafor-api/index.php?route=home [L]
 
-RewriteRule students$ /areafor-api/index.php?route=students [L]
+RewriteRule api/students$ /areafor-api/index.php?route=students [L]
+RewriteRule api/teachers$ /areafor-api/index.php?route=teachers [L]

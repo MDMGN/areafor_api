@@ -3,9 +3,9 @@ require_once('app/models/StudentsModel.php');
 global $dirBase;
 global $errorDb;
 global $json;
-$peticion=$_SERVER['REQUEST_METHOD'];
+$request=$_SERVER['REQUEST_METHOD'];
     try{
-        switch ($peticion) {
+        switch ($request) {
             case 'GET':
                 $json=StudentsModel::getAllStudents();
                 break;
@@ -13,16 +13,18 @@ $peticion=$_SERVER['REQUEST_METHOD'];
                 $json=StudentsModel::setNewStudent($_POST);
                 break;
             case 'PUT':
-                $json=StudentsModel::setStudent($_REQUEST);
+                parse_str(file_get_contents("php://input"),$put_vars);
+                $json=StudentsModel::setStudent($put_vars);
                 break;
             case 'DELETE':
-                $json=StudentsModel::deleteStudent($_REQUEST);
+                parse_str(file_get_contents("php://input"),$delete_vars);
+                $json=StudentsModel::deleteStudent($delete_vars);
                 break;
             default:
                 header("HTTP/1.1 400 Bad Request");
         }
     }catch(Exception $e){
-        die($e);
+        header("HTTP/1.1 500 Server Error");
         $errorDb=true;
     }
   /**
