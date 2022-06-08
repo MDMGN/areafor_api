@@ -11,7 +11,7 @@
                 dbname=".$data['database'].";
                 charset=utf8",
                 $data['username'],
-                $data['password']);
+                $data['password'],array(PDO::MYSQL_ATTR_FOUND_ROWS => true));
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
             }catch(PDOException $e){
                 die('Message: '.$e->getMessage().' Line:'.$e->getLine());
