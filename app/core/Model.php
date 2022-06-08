@@ -4,10 +4,10 @@
         /** @var string Directorio en el que se ejecuta nuestra app */ 
         protected static $dirBase = false;
         public static function setDirBase($arg) { self::$dirBase = $arg; }
-        
+
         protected static function data_decode_entity($data):Array{
             foreach ($data as $key => $value) {
-                if($key <> "id") $value= html_entity_decode($value);
+                if($key <> "id") $data["$key"]= html_entity_decode($value);
             }
             return $data;
         }
