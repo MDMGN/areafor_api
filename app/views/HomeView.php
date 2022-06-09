@@ -13,19 +13,17 @@
    <main>
        <section>
            <article>
+               <h2>URL</h2>
+                <strong><code>http://192.168.1.49/areafor-api/students</code></strong><br><br>
+                <strong><code>http://192.168.1.49/areafor-api/teachers</code></strong>
+           </article>
+           <article>
             <h2>GET HTTP REQUEST</h2>
-                <strong><code>http://192.168.1.49/areafor-api/students</code></strong>
-                <p>Retorna todos los estudiantes en <strong><code>JSON</code></strong>. Debemos hacer la petición a la API por el metodo HTTP GET.</p>
+                <p>Retorna todos los estudiantes o tutores en <strong><code>JSON</code></strong>. Debemos hacer la petición a la API por el metodo HTTP <strong>GET</strong>.</p>
            </article>
            <article>
                 <h2>POST HTTP REQUEST</h2>
-                <strong><code>http://192.168.1.49/areafor-api/students</code></strong>
-                <p>Insertar un estudiante. Debemos hacer la petición a la API por el metodo HTTP GET</p>
-           </article>
-           <article>
-                <h2>POST HTTP REQUEST</h2>
-                <strong><code>http://192.168.1.49/areafor-api/students</code></strong>
-                <p>Insertar un estudiante. Debemos hacer la petición a la API por el metodo HTTP POST y pasando al body los siguientes parametros:</p>
+                <p>Insertar un estudiante o tutor. Debemos hacer la petición a la API por el metodo HTTP <strong>POST</strong> y pasando al body los siguientes parametros:</p>
                 <ul>
                     <li><strong><code>name</code></strong> (Nombre del alumno).</li>
                     <li><strong><code>surname</code></strong> (Apellidos).</li>
@@ -35,8 +33,7 @@
            </article>
            <article>
                 <h2>PUT HTTP REQUEST</h2>
-                <strong><code>http://192.168.1.49/areafor-api/students</code></strong>
-                <p>Insertar un estudiante. Debemos hacer la petición a la API por el metodo HTTP PUT y pasando al body los siguientes parametros:</p>
+                <p>Modifica un estudiante o tutor por su <strong>id</strong>. Debemos hacer la petición a la API por el metodo HTTP <strong>PUT</strong> y pasando al body los siguientes parametros:</p>
                 <ul>
                     <li><strong><code>id</code></strong> (id del alumno a modificar).</li>
                     <li><strong><code>name</code></strong> (Nombre del alumno).</li>
@@ -45,9 +42,8 @@
                     <li><strong><code>knowledge</code></strong> (Conocimientos).</li>
            </article>
            <article>
-                <h2>PUT HTTP REQUEST</h2>
-                <strong><code>http://192.168.1.49/areafor-api/students</code></strong>
-                <p>Insertar un estudiante. Debemos hacer la petición a la API por el metodo HTTP PUT y pasando al body los siguientes parametros:</p>
+                <h2>DELETE HTTP REQUEST</h2>
+                <p>Elimina un estudiante o tutor por su <strong>id</strong>. Debemos hacer la petición a la API por el metodo HTTP <strong>DELETE</strong> y pasando al body los siguientes parametros:</p>
                 <ul>
                     <li><strong><code>id</code></strong> (id del alumno a eliminar).</li>
            </article>

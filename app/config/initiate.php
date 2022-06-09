@@ -1,4 +1,5 @@
 <?php
+       error_reporting(0);
        try{
           Db::connect(require('db.php'));
        }catch(Exception $e){
@@ -10,7 +11,6 @@
        $dirBase = '/'. $dirBase[1];       
        Model::setDirBase($dirBase);
        $errorDb=false;
-
 
        // Iniciamos el enrutamiento de controladores 
        Router::setRoutes(require('routes.php'));

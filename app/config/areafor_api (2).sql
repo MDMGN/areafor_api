@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2022 a las 20:00:15
+-- Tiempo de generación: 09-06-2022 a las 19:11:24
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -34,6 +34,7 @@ CREATE TABLE `alumnos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `conocimientos` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -41,15 +42,20 @@ CREATE TABLE `alumnos` (
 -- Volcado de datos para la tabla `alumnos`
 --
 
-INSERT INTO `alumnos` (`id`, `nombre`, `apellidos`, `conocimientos`) VALUES
-(7, 'Franklyn', 'Montoya', ''),
-(8, 'Elena', 'Jiménez', ''),
-(9, 'Igor', 'Aranaz', ''),
-(10, 'Jean Pool', 'Guerrero', ''),
-(11, 'Javier', 'Balliache', ''),
-(12, 'Iñaki', 'Gaztelu', ''),
-(13, 'Jose María', 'Tomé', ''),
-(14, 'Daniel', 'Hernández', '');
+INSERT INTO `alumnos` (`id`, `nombre`, `apellidos`, `email`, `conocimientos`) VALUES
+(7, 'Franklyn', 'Montoya', '', ''),
+(8, 'Elena', 'Jiménez', '', ''),
+(9, 'Igor', 'Aranaz', '', ''),
+(10, 'Jean Pool', 'Guerrero', '', ''),
+(11, 'Javier', 'Balliache', '', ''),
+(12, 'Iñaki', 'Gaztelu', '', ''),
+(13, 'Jose María', 'Tomé', '', ''),
+(14, 'Daniel', 'Hernández', '', ''),
+(15, 'Pepe', 'Pepito', 'a@a.com', 'nada'),
+(16, 'Maria', 'Nunez', 'aaaaaa@aaaa.com', 'Informatica'),
+(17, 'Pello', 'Agirre', 'aaaaaa@aaarrr..com', 'Informatica'),
+(18, 'Pello', 'fernandez', 'aaaaaa@aaarrr..com', 'Informatica'),
+(19, 'Pello MAri', 'Fernandez', 'aaaaaa@aaarrr..com', 'Informatica');
 
 -- --------------------------------------------------------
 
@@ -87,7 +93,7 @@ CREATE TABLE `tutores` (
 --
 
 INSERT INTO `tutores` (`id`, `nombre`, `apellidos`, `email`, `conocimientos`) VALUES
-(1, 'Alberto', 'Mozo', '', '');
+(6, 'Albertodsss', 'Mozodsss', 'albertomozo@gmail.com', 'inform&aacute;tica');
 
 --
 -- Índices para tablas volcadas
@@ -120,7 +126,7 @@ ALTER TABLE `tutores`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `redes_sociales`
@@ -132,7 +138,7 @@ ALTER TABLE `redes_sociales`
 -- AUTO_INCREMENT de la tabla `tutores`
 --
 ALTER TABLE `tutores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
