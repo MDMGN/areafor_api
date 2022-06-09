@@ -7,13 +7,15 @@
 
         protected static function data_decode_entity($data):Array{
             foreach ($data as $key => $value) {
-                if($key <> "id") $data["$key"]= html_entity_decode($value);
+                foreach ($value as $key2 => $value2) {
+                   if($key2 <> "id") $data[$key][$key2]= html_entity_decode($value2);
+                }
             }
             return $data;
         }
         protected static function validData($data):bool{
             $regExp=[
-            "name"=>"/^[a-zA-ZÀ-ÿ\s]{4,16}$/", // Letras y espacios, pueden llevar tildes.
+            "name"=>"/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]{4,16}+$/", // Letras y espacios, pueden llevar tildes.
             "surname"=>"/^[a-zA-ZÀ-ÿ\s]{4,16}$/", // Letras y espacios, pueden llevar tildes.
             "email"=> "/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/"
             ];

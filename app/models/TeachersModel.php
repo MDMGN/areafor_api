@@ -35,7 +35,6 @@ class TeachersModel extends Model{
 
             if(!self::$conn) 
             throw new Exception(self::$conn->error);
-
             return self::data_decode_entity($result);
     }
 
@@ -104,7 +103,16 @@ class TeachersModel extends Model{
         $surname=htmlentities(addslashes($datos['surname']));
         $email=htmlentities(addslashes($datos['email']));
         $knowledge=htmlentities(addslashes($datos['knowledge']));
-        $id=htmlentities(addslashes($datos['id']));
+        if(!isset($datos['id'])){
+            header("HTTP/1.1 400 Bad Request");
+            $result=[
+                "error"=>true,
+                "message"=>"Error al intentar actulizar los datos. No hay valor en id"
+            ];
+            return $result;
+        }else{
+            $id=htmlentities(addslashes($datos['id']));
+        }
         $data=[
             "name"=>$name,
             "surname"=>$surname,

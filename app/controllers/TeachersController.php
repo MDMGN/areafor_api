@@ -22,6 +22,10 @@ $request=$_SERVER['REQUEST_METHOD'];
                 break;
             default:
                 header("HTTP/1.1 400 Bad Request");
+                $json=[
+                    "error"=>true,
+                    "message"=>"La petición HTTP no es soportada."
+                ];
         }
     }catch(Exception $e){
         header("HTTP/1.1 500 Server Error");
