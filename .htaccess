@@ -9,5 +9,5 @@ Options -MultiViews
 DirectoryIndex /areafor-api/index.php?route=home [L]
 RewriteRule home$ /areafor-api/index.php?route=home [L]
 
-RewriteRule students$ /areafor-api/index.php?route=students [L]
-RewriteRule teachers$ /areafor-api/index.php?route=teachers [L]
+RewriteRule alumnos$ /areafor-api/index.php?route=alumnos [L]
+RewriteRule tutores$ /areafor-api/index.php?route=tutores [L]

@@ -1,5 +1,5 @@
 <?php
-require_once('app/models/StudentsModel.php');
+require_once('app/models/PeopleModel.php');
 global $dirBase;
 global $errorDb;
 global $json;
@@ -7,18 +7,18 @@ $request=$_SERVER['REQUEST_METHOD'];
     try{
         switch ($request) {
             case 'GET':
-                $json=StudentsModel::getAllStudents();
+                $json=PeopleModel::getAllPeople();
                 break;
             case 'POST':
-                $json=StudentsModel::setNewStudent($_POST);
+                $json=PeopleModel::setNewPerson($_POST);
                 break;
             case 'PUT':
                 parse_str(file_get_contents("php://input"),$put_vars);
-                $json=StudentsModel::setStudent($put_vars);
+                $json=PeopleModel::setPerson($put_vars);
                 break;
             case 'DELETE':
                 parse_str(file_get_contents("php://input"),$delete_vars);
-                $json=StudentsModel::deleteStudent($delete_vars);
+                $json=PeopleModel::deletePerson($delete_vars);
                 break;
             default:
                 header("HTTP/1.1 400 Bad Request");
@@ -47,5 +47,5 @@ $request=$_SERVER['REQUEST_METHOD'];
       return apache_request_headers();
     }
   }
-  require_once('app/views/StudentsView.php');
+  require_once('app/views/PeopleView.php');
 ?>

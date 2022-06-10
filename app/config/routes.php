@@ -2,7 +2,7 @@
 
 return[
     "home"=>"HomeController",
-    "students"=>"StudentsController",
-    "teachers"=>"TeachersController"
+    "alumnos"=>"PeopleController",
+    "tutores"=>"PeopleController"
 ]
 ?>

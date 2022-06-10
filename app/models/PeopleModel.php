@@ -1,14 +1,14 @@
-<?php 
-class TeachersModel extends Model{
+<?php
 
-    const NOMBRE_TABLA="tutores";
+final class PeopleModel extends Model {
 
-    private static function verifyTeacher($name,$surname):bool{
-        $sql= "SELECT nombre FROM tutores WHERE nombre=:name AND apellidos=:surname";
+    private static function verifyPerson($name,$surname):bool{
+        $sql= "SELECT nombre FROM ".self::$table." WHERE nombre=:name AND apellidos=:surname";
         $result=self::$conn->prepare($sql);
         $result->bindValue(":name",$name);
         $result->bindValue(":surname",$surname);
         $result->execute();
+
         if(!self::$conn) 
             throw new Exception(self::$conn->error);
 
@@ -21,12 +21,12 @@ class TeachersModel extends Model{
     }
 
     /**
-     * Devuelve todos los tutores
-     * @return Array con todos los datos
+     * Devuelve todos los People
+     * @return Array con todos datos o error
      */
-    public static function getAllTeachers():Array{
+    public static function getAllPeople():Array{
             
-            $sql="SELECT * FROM " . self::NOMBRE_TABLA;
+            $sql="SELECT * FROM " . self::$table;
             $response=self::$conn->prepare($sql);
             $response->execute();
             $response->setFetchMode(PDO::FETCH_ASSOC);
@@ -35,24 +35,25 @@ class TeachersModel extends Model{
 
             if(!self::$conn) 
             throw new Exception(self::$conn->error);
+
             return self::data_decode_entity($result);
     }
 
     /**
-     * Inserta nuevo tutor
-     * @param $teachers array con los datos del nuevo tutor
+     * Inserta nuevo alumno/tutor
+     * @param $student array con los datos del nuevo alummno
      * @return Array del resultado de la inserción
      */
-    public static function setNewTeacher($teachers):Array{
+    public static function setNewPerson($dat):Array{
 
-            $sql = "INSERT INTO " . self::NOMBRE_TABLA . " (`nombre`, `apellidos`, `email`,`conocimientos`)
+            $sql = "INSERT INTO " . self::$table. " (`nombre`, `apellidos`, `email`,`conocimientos`)
                     VALUES (:name,:surname,:email,:knowledge)";
 
             $response = self::$conn->prepare($sql);
-            $name=htmlentities(addslashes($teachers['name']));
-            $surname=htmlentities(addslashes($teachers['surname']));
-            $email=htmlentities(addslashes($teachers['email']));
-            $knowledge=addslashes($teachers['knowledge']);
+            $name=htmlentities(addslashes($dat['name']));
+            $surname=htmlentities(addslashes($dat['surname']));
+            $email=htmlentities(addslashes($dat['email']));
+            $knowledge=htmlentities(addslashes($dat['knowledge']));
             $data=[
                 "name"=>$name,
                 "surname"=>$surname,
@@ -60,11 +61,10 @@ class TeachersModel extends Model{
                 "knowledge"=>$knowledge
             ];
             if(self::validData($data)){
-                if(self::verifyTeacher($name,$surname)){
-                    header("HTTP/1.1 400 Bad Request");
+                if(self::verifyPerson($name,$surname)){
                     $result=[
                         "error"=>true,
-                        "message"=>"El tutor ya existe."
+                        "message"=>"El estudiante ya existe."
                     ];
                 }else{
                     $response->bindValue(":name",$name);
@@ -72,14 +72,12 @@ class TeachersModel extends Model{
                     $response->bindValue(":email",$email);
                     $response->bindValue(":knowledge",$knowledge);
                     $response->execute();
-                    header("HTTP/1.1 200 OK");
                     $result=[
                         "error"=>false,
-                        "message"=>"Tutor insertado exitosamente."
+                        "message"=>"Estudiante insertado exitosamente."
                     ];
                 }
             }else{
-                header("HTTP/1.1 400 Bad Request");
                 $result=[
                     "error"=>true,
                     "message"=>"Error al intentar insertar los datos. Comprueba que los datos sean validos y no estén vacíos."
@@ -90,12 +88,12 @@ class TeachersModel extends Model{
     }
 
      /**
-     * Actualiza un tutor relacionado con un id de la base de datos 
+     * Actualiza un alumno/tutor relacionado con un id de la base de datos 
      * @param $datos nuevos datos
-     * @return Array de respuesta
+     * @return resultado de la modificación
      */
-    public static function setTeacher($datos):Array{
-        $sql = "UPDATE " . self::NOMBRE_TABLA . " SET nombre =:name, apellidos=:surname, email= :email,
+    public static function setPerson($datos):Array{
+        $sql = "UPDATE " . self::$table . " SET nombre =:name, apellidos=:surname, email= :email,
                 conocimientos=:knowledge WHERE id =:id";
 
         $response = self::$conn->prepare($sql);
@@ -126,22 +124,11 @@ class TeachersModel extends Model{
             $response->bindValue(":knowledge",$knowledge);
             $response->bindValue(":id",$id);
             $response->execute();
-            $done = $response->rowCount();
-            if($done){
-                header("HTTP/1.1 200 OK");
-                $result=[
-                    "error"=>false,
-                    "message"=>"Datos actualizados exitosamente."
-                ];
-            }else{
-                header("HTTP/1.1 400 Bad Request");
-                $result=[
-                    "error"=>true,
-                    "message"=>"Error al intentar actulizar los datos. Comprueba que el id sea valido"
-                ];
-            }
+            $result=[
+                "error"=>false,
+                "message"=>"Datos actualizados exitosamente."
+            ];
         }else{
-            header("HTTP/1.1 400 Bad Request");
             $result=[
                 "error"=>true,
                 "message"=>"Error al intentar actulizar los datos. Comprueba que los datos sean validos y no estén vacíos."
@@ -152,26 +139,24 @@ class TeachersModel extends Model{
     }
 
     /**
-     * Elimina un tutor por su id
+     * Elimina un alumno/tutor por su id
      * @param $datos con el id
-     * @return Array de respuesta
+     * @return resultado de la eliminación
      */
-    public static function deleteTeacher($data):Array{
+    public static function deletePerson($data):Array{
 
-                $sql="DELETE FROM " . self::NOMBRE_TABLA . " WHERE id=:id";
+                $sql="DELETE FROM " . self::$table . " WHERE id=:id";
                 $response = self::$conn->prepare($sql);
                 $id=htmlentities(addslashes($data['id']));
                 $response->bindValue(":id", $id);
                 $response->execute();
-                $res=$response->rowCount();
-                if($res>0){
-                    header("HTTP/1.1 200 OK");
+                $reg=$response->rowCount();
+                if($reg>0){
                     $result=[
                         "error"=>false,
                         "message"=>"Alumno eliminado exitosamente"
                     ];
                 }else{
-                    header("HTTP/1.1 400 Bad Request");
                     $result=[
                         "error"=>true,
                         "message"=>"Error al intentar la eliminación. Comprueba que el id es valido."
@@ -181,4 +166,5 @@ class TeachersModel extends Model{
                 return $result;
 
     }
+
 }

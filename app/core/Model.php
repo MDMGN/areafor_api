@@ -3,7 +3,9 @@
 
         /** @var string Directorio en el que se ejecuta nuestra app */ 
         protected static $dirBase = false;
+        protected static $table = null;
         public static function setDirBase($arg) { self::$dirBase = $arg; }
+        public static function setTable($arg) { self::$table = $arg; }
 
         protected static function data_decode_entity($data):Array{
             foreach ($data as $key => $value) {

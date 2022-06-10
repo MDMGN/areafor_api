@@ -26,11 +26,11 @@ USE `areafor_api`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `alumnos`
+-- Estructura de tabla para la tabla `People`
 --
 
-DROP TABLE IF EXISTS `alumnos`;
-CREATE TABLE `alumnos` (
+DROP TABLE IF EXISTS `People`;
+CREATE TABLE `People` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE `alumnos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `alumnos`
+-- Volcado de datos para la tabla `People`
 --
 
-INSERT INTO `alumnos` (`id`, `nombre`, `apellidos`, `email`, `conocimientos`) VALUES
+INSERT INTO `People` (`id`, `nombre`, `apellidos`, `email`, `conocimientos`) VALUES
 (7, 'Franklyn', 'Montoya', '', ''),
 (8, 'Elena', 'Jiménez', '', ''),
 (9, 'Igor', 'Aranaz', '', ''),
@@ -100,9 +100,9 @@ INSERT INTO `tutores` (`id`, `nombre`, `apellidos`, `email`, `conocimientos`) VA
 --
 
 --
--- Indices de la tabla `alumnos`
+-- Indices de la tabla `People`
 --
-ALTER TABLE `alumnos`
+ALTER TABLE `People`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -123,9 +123,9 @@ ALTER TABLE `tutores`
 --
 
 --
--- AUTO_INCREMENT de la tabla `alumnos`
+-- AUTO_INCREMENT de la tabla `People`
 --
-ALTER TABLE `alumnos`
+ALTER TABLE `People`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
