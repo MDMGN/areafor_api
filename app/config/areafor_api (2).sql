@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2022 a las 19:11:24
+-- Tiempo de generación: 17-06-2022 a las 19:53:02
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -26,11 +26,11 @@ USE `areafor_api`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `People`
+-- Estructura de tabla para la tabla `alumnos`
 --
 
-DROP TABLE IF EXISTS `People`;
-CREATE TABLE `People` (
+DROP TABLE IF EXISTS `alumnos`;
+CREATE TABLE `alumnos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE `People` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `People`
+-- Volcado de datos para la tabla `alumnos`
 --
 
-INSERT INTO `People` (`id`, `nombre`, `apellidos`, `email`, `conocimientos`) VALUES
+INSERT INTO `alumnos` (`id`, `nombre`, `apellidos`, `email`, `conocimientos`) VALUES
 (7, 'Franklyn', 'Montoya', '', ''),
 (8, 'Elena', 'Jiménez', '', ''),
 (9, 'Igor', 'Aranaz', '', ''),
@@ -55,7 +55,9 @@ INSERT INTO `People` (`id`, `nombre`, `apellidos`, `email`, `conocimientos`) VAL
 (16, 'Maria', 'Nunez', 'aaaaaa@aaaa.com', 'Informatica'),
 (17, 'Pello', 'Agirre', 'aaaaaa@aaarrr..com', 'Informatica'),
 (18, 'Pello', 'fernandez', 'aaaaaa@aaarrr..com', 'Informatica'),
-(19, 'Pello MAri', 'Fernandez', 'aaaaaa@aaarrr..com', 'Informatica');
+(19, 'Pello MAri', 'Fernandez', 'aaaaaa@aaarrr..com', 'Informatica'),
+(20, 'Alberto', 'Mozo', 'albertomozo@gmail.com', 'inform&aacute;tica'),
+(21, 'Fernando', 'Vasquez', 'micha@gmail.com', 'informática');
 
 -- --------------------------------------------------------
 
@@ -93,16 +95,16 @@ CREATE TABLE `tutores` (
 --
 
 INSERT INTO `tutores` (`id`, `nombre`, `apellidos`, `email`, `conocimientos`) VALUES
-(6, 'Albertodsss', 'Mozodsss', 'albertomozo@gmail.com', 'inform&aacute;tica');
+(6, 'Alberto', 'Mozo', 'albertomozo@gmail.com', 'inform&aacute;tica');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `People`
+-- Indices de la tabla `alumnos`
 --
-ALTER TABLE `People`
+ALTER TABLE `alumnos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -123,10 +125,10 @@ ALTER TABLE `tutores`
 --
 
 --
--- AUTO_INCREMENT de la tabla `People`
+-- AUTO_INCREMENT de la tabla `alumnos`
 --
-ALTER TABLE `People`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+ALTER TABLE `alumnos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `redes_sociales`
@@ -139,6 +141,16 @@ ALTER TABLE `redes_sociales`
 --
 ALTER TABLE `tutores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `redes_sociales`
+--
+ALTER TABLE `redes_sociales`
+  ADD CONSTRAINT `redes_sociales_ibfk_1` FOREIGN KEY (`id_alumno_profesor`) REFERENCES `alumnos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
