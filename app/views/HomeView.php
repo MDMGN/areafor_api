@@ -9,19 +9,27 @@
 <body>
    <h1>Areafor-API REST</h1>
    <h2>¿Para qué sirve?</h2>
-   <p>Esta API REST permite el consumo de datos de People y tutores en el curso Backend de Areafor 2022. Permitiendo el consumo RESTFul de esta API.</p>
+   <p>Esta API REST permite el consumo de datos de alumnos y tutores del curso Backend de Areafor 2022. Permitiendo el consumo RESTFul de esta API.</p>
    <main>
        <section>
            <article>
                <h2>URL</h2>
                <p>Haremos una petición a la API con el nombre de la tabla alumno o profesor.</p>
-               <p><strong>Ejemplo:</strong></p>
+               <strong>Ejemplo:</strong>
                 <strong><code>http://192.168.1.49/areafor-api/alumnos</code></strong><br><br>
            </article>
            <article>
             <h2>GET HTTP REQUEST</h2>
                 <p>Retorna todos los estudiantes o tutores en <strong><code>JSON</code></strong>. Debemos hacer la petición a la API por el metodo HTTP <strong>GET</strong>.</p>
            </article>
+            <hr>
+           <p> <strong>Para las siguientes peticiones se necesita de una autorización con la clave API dento de las cabeceras.</strong> <br><br></p>
+           <strong><pre>
+           <strong>Ejemplo:</strong>
+            <code>Authorization="API Key"</code>
+            </pre> </strong><br>
+            Solicita la API Key con el administador de la <b>API</b>.
+           </p><br><br>
            <article>
                 <h2>POST HTTP REQUEST</h2>
                 <p>Insertar un estudiante o tutor. Debemos hacer la petición a la API por el metodo HTTP <strong>POST</strong> y pasando al body los siguientes parametros:</p>

@@ -3,7 +3,7 @@
 
         /** @var string Directorio en el que se ejecuta nuestra app */ 
         protected static $dirBase = false;
-        protected static $table = null;
+        public static $table = null;
         public static function setDirBase($arg) { self::$dirBase = $arg; }
         public static function setTable($arg) { self::$table = $arg; }
 
@@ -32,5 +32,12 @@
                 }
             }
             return true;
+        }
+        protected static function getApiKey(){
+            return "ee3f2ab954e0b3c7b3c73abb7f0ff921";
+        }
+        protected static function publicAccess(){
+            $tables=["alumnos"];
+            return $tables;
         }
     }

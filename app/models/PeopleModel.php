@@ -48,7 +48,6 @@ final class PeopleModel extends Model {
 
             $sql = "INSERT INTO " . self::$table. " (`nombre`, `apellidos`, `email`,`conocimientos`)
                     VALUES (:name,:surname,:email,:knowledge)";
-
             $response = self::$conn->prepare($sql);
             $name=htmlentities(addslashes($dat['name']));
             $surname=htmlentities(addslashes($dat['surname']));
@@ -62,10 +61,13 @@ final class PeopleModel extends Model {
             ];
             if(self::validData($data)){
                 if(self::verifyPerson($name,$surname)){
+                    header("HTTP/1.1 400 Bad Request");
                     $result=[
                         "error"=>true,
-                        "message"=>"El estudiante ya existe."
+                        "status"=>400,
+                        "message"=>"El tutor o estudiante ya existe."
                     ];
+                    
                 }else{
                     $response->bindValue(":name",$name);
                     $response->bindValue(":surname",$surname);
@@ -74,12 +76,15 @@ final class PeopleModel extends Model {
                     $response->execute();
                     $result=[
                         "error"=>false,
-                        "message"=>"Estudiante insertado exitosamente."
+                        "status"=>200,
+                        "message"=>"Estudiante o tutor insertado exitosamente."
                     ];
                 }
             }else{
+                header("HTTP/1.1 400 Bad Request");
                 $result=[
                     "error"=>true,
+                    "status"=>400,
                     "message"=>"Error al intentar insertar los datos. Comprueba que los datos sean validos y no estén vacíos."
                 ];
             }
@@ -105,7 +110,8 @@ final class PeopleModel extends Model {
             header("HTTP/1.1 400 Bad Request");
             $result=[
                 "error"=>true,
-                "message"=>"Error al intentar actulizar los datos. No hay valor en id"
+                "status"=>400,
+                "message"=>"Error al intentar actulizar los datos. No hay valor en id."
             ];
             return $result;
         }else{
@@ -126,12 +132,15 @@ final class PeopleModel extends Model {
             $response->execute();
             $result=[
                 "error"=>false,
+                "status"=>200,
                 "message"=>"Datos actualizados exitosamente."
             ];
         }else{
+            header("HTTP/1.1 400 Bad Request");
             $result=[
                 "error"=>true,
-                "message"=>"Error al intentar actulizar los datos. Comprueba que los datos sean validos y no estén vacíos."
+                "status"=>400,
+                "message"=>"Error al intentar actualizar los datos. Comprueba que los datos sean validos y no estén vacíos."
             ];
         }
         if(!self::$conn) throw new Exception(self::$conn->error);
@@ -154,17 +163,25 @@ final class PeopleModel extends Model {
                 if($reg>0){
                     $result=[
                         "error"=>false,
-                        "message"=>"Alumno eliminado exitosamente"
+                        "status"=>200,
+                        "message"=>"Alumno o tutor eliminado exitosamente."
                     ];
                 }else{
                     $result=[
                         "error"=>true,
+                        "status"=>400,
                         "message"=>"Error al intentar la eliminación. Comprueba que el id es valido."
                     ];
                 }
                 if(!self::$conn) throw new Exception(self::$conn->error);
                 return $result;
 
+    }
+    public static function verifyAccess():bool{
+        if( !isset(getallheaders()["Authorization"]) || getallheaders()["Authorization"]!== self::getApiKey()){
+                return false;           
+        }
+        return true;
     }
 
 }
