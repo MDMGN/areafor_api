@@ -13,4 +13,5 @@ DirectoryIndex /areafor-api/index.php?route=home [L]
 RewriteRule home$ /areafor-api/index.php?route=home [L]
 
 RewriteRule alumnos$ /areafor-api/index.php?route=alumnos [L]
+RewriteRule alumnos/(\d+)$ /areafor-api/index.php?id=$1&route=alumnos [L]
 RewriteRule tutores$ /areafor-api/index.php?route=tutores [L]

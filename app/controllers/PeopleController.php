@@ -35,7 +35,7 @@ $request=$_SERVER['REQUEST_METHOD'];
         }else{
             switch ($request) {
                 case 'GET':
-                    $json=PeopleModel::getAllPeople();
+                    $json=(!isset($_GET['id'])) ? PeopleModel::getAllPeople() : PeopleModel::getPeopleById($_GET['id']);
                     break;
                 case 'POST':
                     $json=PeopleModel::setNewPerson($_POST);
@@ -59,6 +59,11 @@ $request=$_SERVER['REQUEST_METHOD'];
         }
     }catch(Exception $e){
         header("HTTP/1.1 500 Server Error");
+        $json=[
+            "error"=>true,
+            "status"=>500,
+            "message"=>"El servidor no ecuentra respuesta. $e"
+        ];
         $errorDb=true;
     }
   /**

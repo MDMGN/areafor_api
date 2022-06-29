@@ -1,5 +1,7 @@
 <?php
 
+use LDAP\Result;
+
 final class PeopleModel extends Model {
 
     private static function verifyPerson($name,$surname):bool{
@@ -37,6 +39,34 @@ final class PeopleModel extends Model {
             throw new Exception(self::$conn->error);
 
             return self::data_decode_entity($result);
+    }
+    /**
+     * Devuelve una persona por su id.
+     * @return Array con todos datos o error
+     */
+    public static function getPeopleByID($id):Array{
+            
+        $sql="SELECT * FROM " . self::$table. " WHERE id=:id";
+        $response=self::$conn->prepare($sql);
+        $response->bindValue(":id",$id);
+        $response->execute();
+        $response->setFetchMode(PDO::FETCH_ASSOC);
+
+        $result = $response->fetchAll();
+
+        if(!self::$conn) 
+        throw new Exception(self::$conn->error);
+        if(!$result){
+            header("HTTP/1.1 400 Bad Request");
+            $result=[
+                "error"=>true,
+                "status"=>400,
+                "message"=>"El tutor o estudiante no existe."
+            ];
+        }else{
+            $result=self::data_decode_entity($result);
+        }
+        return $result;
     }
 
     /**
