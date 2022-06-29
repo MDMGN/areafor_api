@@ -7,6 +7,7 @@ RewriteBase /
 Options -MultiViews
 
 ErrorDocument 404 /areafor-api/index.php?route=not_found
+ErrorDocument 405 /areafor-api/index.php?route=not_found
 ErrorDocument 500 /areafor-api/index.php?route=server_error
 
 DirectoryIndex /areafor-api/index.php?route=home [L]

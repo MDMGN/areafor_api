@@ -19,7 +19,8 @@ $request=$_SERVER['REQUEST_METHOD'];
                 "status"=>500,
                 "message"=>"Error en el servidor."
             ];
-        }else if(http_response_code()===404){
+        }else if(http_response_code()===404 || http_response_code()===405){
+            http_response_code("400");
             $json=[
                 "error"=>true,
                 "status"=>404,
@@ -62,7 +63,7 @@ $request=$_SERVER['REQUEST_METHOD'];
         $json=[
             "error"=>true,
             "status"=>500,
-            "message"=>"El servidor no ecuentra respuesta. $e"
+            "message"=>"El servidor no ecuentra respuesta."
         ];
         $errorDb=true;
     }
