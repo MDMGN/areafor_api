@@ -20,7 +20,7 @@
            </article>
            <article>
             <h2>GET HTTP REQUEST</h2>
-                <p>Retorna todos los estudiantes o tutores en <strong><code>JSON</code></strong>. Debemos hacer la petición a la API por el metodo HTTP <strong>GET</strong>.</p>
+                <p>Retorna todos los estudiantes o tutores o a uno por su <code>id</code>. Debemos hacer la petición a la API por el metodo HTTP <strong>GET</strong>.</p>
            </article>
             <hr>
            <p> <strong>Para las siguientes peticiones se necesita de una autorización con la clave API dento de las cabeceras.</strong> <br><br></p>
